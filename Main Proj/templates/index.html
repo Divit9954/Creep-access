@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bloodstain Analysis</title>
+</head>
+<style>/* Innovative Dark Aesthetic Theme */
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+    
+    body {
+        background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
+        color: #f8f9fa;
+        font-family: 'Orbitron', sans-serif;
+        text-align: center;
+        padding: 50px;
+    }
+    
+    h1 {
+        font-size: 3em;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: #ff3e4d;
+        text-shadow: 2px 2px 8px rgba(255, 62, 77, 0.8);
+        animation: glow 1.5s infinite alternate;
+    }
+    
+    @keyframes glow {
+        from {
+            text-shadow: 2px 2px 8px rgba(255, 62, 77, 0.8);
+        }
+        to {
+            text-shadow: 2px 2px 20px rgba(255, 62, 77, 1);
+        }
+    }
+    
+    form {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(255, 62, 77, 0.2);
+        display: inline-block;
+        margin-top: 20px;
+        transition: transform 0.3s;
+    }
+    
+    form:hover {
+        transform: scale(1.05);
+    }
+    
+    input[type="file"] {
+        background: #222;
+        border: 1px solid #ff3e4d;
+        color: white;
+        padding: 12px;
+        border-radius: 5px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    
+    input[type="file"]:hover {
+        background: #333;
+    }
+    
+    button {
+        background: linear-gradient(90deg, #ff3e4d, #ff7300);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.3s;
+        font-weight: bold;
+        box-shadow: 0 4px 10px rgba(255, 62, 77, 0.4);
+    }
+    
+    button:hover {
+        background: linear-gradient(90deg, #ff7300, #ff3e4d);
+        transform: translateY(-2px);
+    }
+    
+    h2 {
+        margin-top: 30px;
+        color: #ffcc00;
+        font-size: 2em;
+        text-shadow: 2px 2px 8px rgba(255, 204, 0, 0.8);
+    }
+    
+    p {
+        font-size: 1.3em;
+        margin: 8px 0;
+        color: #dcdcdc;
+    }
+    
+    img {
+        border-radius: 15px;
+        margin-top: 20px;
+        box-shadow: 0 6px 12px rgba(255, 62, 77, 0.3);
+        border: 3px solid #ff3e4d;
+        transition: transform 0.3s;
+    }
+    
+    img:hover {
+        transform: scale(1.1);
+    }</style>
+<body>
+    <h1>Upload a Bloodstain Image</h1>
+    <form action="/predict" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if result %}
+        <h2>Prediction:</h2>
+        <img src="{{ image_path }}" alt="Uploaded Image" width="200">
+        <p><strong>Type:</strong> {{ result["Bloodstain Type"] }}</p>
+        <p><strong>Weapon:</strong> {{ result["Weapon"] }}</p>
+        <p><strong>Impact:</strong> {{ result["Impact"] }}</p>
+        <p><strong>Movement:</strong> {{ result["Movement"] }}</p>
+    {% endif %}
+</body>
+</html>
